@@ -1,0 +1,57 @@
+<h1> List of products Out Of Stock</h1>
+<form class="col-md-6">
+    <input type="text" name="p" [(ngModel)]="Category" class="form-control" placeholder="search by Category">
+</form>
+<table Class="table">
+
+    <thead>
+        <tr>
+            <th>id</th>
+            <th>firstName</th>
+            <th>lastName</th>
+            <th>birthDate</th>
+            <th>accountCategory</th>
+            <th>email</th>
+            <th>password</th>
+            <th>picture</th>
+            <th>profession</th>
+            <th>Action</th>
+
+        </tr>
+
+    </thead>
+
+    <tbody>
+        <tr *ngFor="let user of listuser">
+            <div *ngIf="user.accountCategory==Category || Category==null">
+
+                <td>{{user.idCustomer}}</td>
+                <td>{{user.firstName}}</td>
+                <td>{{user.lastName}}</td>
+                <td>{{user.birthDate}}</td>
+                <td>{{user.accountCategory}}</td>
+                <td>{{user.email}}</td>
+                <td>{{user.password}}</td>
+                <td><img class="img-responsive" src={{user.picture}} style="height:70px "></td>
+                <td>{{user.profession}}</td>
+                <td>
+                    <div *ngIf="user.accountCategory=='Admin'; then buttondiabled else buttonactive">
+                        Here is never showing
+                    </div>
+
+                    <ng-template #buttondiabled>
+                        <button class="btn btn-warning" (click)="deleteUser(user)" disabled>
+                            Delete</button>
+                    </ng-template>
+
+                    <ng-template #buttonactive>
+                        <button class="btn btn-warning" (click)="deleteUser(user)">
+                            Delete</button>
+                    </ng-template>
+                </td>
+            </div>
+
+        </tr>
+    </tbody>
+
+</table>
